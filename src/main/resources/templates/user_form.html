@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+	<meta charset="ISO-8859-1">	
+	<title th:if="${user.id==null}">Registrar Usuario</title>
+	<title th:unless="${user.id==null}">Editar Usuario</title>
+	<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+</head>
+<body>
+
+	<div th:insert="navbar::navbar"></div>
+	<div class="container text-center">
+		<div>
+			<h1 th:if="${user.id==null}">Registrar Usuario</h1>
+			<h1 th:unless="${user.id==null}">Editar Usuario</h1> 
+		</div>
+
+		<form th:action="@{/users/save}" th:object="${user}"
+			method="post">
+			<input type="hidden" th:field="*{id}" th:value="${user.id}"> 
+			<div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label">Usuario:</label>
+					<div class="col-sm-8">
+						<input type="text"  th:field="*{userName}" class="form-control" required="required">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label">Password:</label>
+					<div class="col-sm-8">
+						<input type="password" th:field="*{password}" class="form-control" required="required">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-form-label col-sm-4 ">Roles:</label>
+					<div class="col-sm-8 text-left">						
+						<th:block th:each="role: ${roles}">
+							<input type="checkbox" th:field="*{roles}" th:text="${role.name}" 
+							   th:value="${role.id}" class="m-2"/>
+						</th:block>
+					</div>
+				</div>
+				
+				<div class="text-center p-3">
+					<button type="submit" class="btn btn-primary">Registrar</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+	<div th:insert="navbar::footer"></div>
+
+</body>
+</html>

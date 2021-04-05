@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<nav th:fragment="navbar"
+		class="navbar navbar-expand-lg bg-danger navbar-dark">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link"th:href="@{/categories/lista}" sec:authorize="hasRole('ROLE_ADMIN')">Categorias</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/products/lista}" sec:authorize="hasRole('ROLE_ADMIN')">Productos</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/users/lista}"sec:authorize="hasRole('ROLE_ADMIN')">Usuarios</a></li>
+			<li class="nav-item"><a class="nav-link"th:href="@{/customers/lista}" sec:authorize="hasRole('ROLE_USER')">Clientes</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/orders/list}">Ordenes</a></li>
+			<li>
+				
+			</li>
+		</ul>
+		</div>
+			<form th:action="@{/logout}" method="post">
+					<input type="submit" class="btn btn-danger" value="Cerrar sesión">
+			</form>
+	</nav>
+	<footer th:fragment="footer" class="bg-light text-center">
+		hampcode </footer>
+</body>
+</html>

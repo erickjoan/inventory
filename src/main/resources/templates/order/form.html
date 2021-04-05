@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventory App</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+</head>
+<body>
+
+	<div th:insert="navbar::navbar"></div>
+	<div class="container">
+		<form th:action="@{/orders/save/}" th:object="${order}"
+			method="post">
+			<div class="card ">
+
+
+				<div class="card-header text-white bg-dark" th:text="${title}"></div>
+				<div class="card-body">
+					<h4 class="card-title">
+						<a class="btn btn-light btn-xs" th:href="@{'/orders/list/'}"
+							th:text="'&laquo; Regresar'"></a>
+					</h4>
+
+
+
+					<div class="form-group row">
+						<label for="customer" class="col-sm-2 col-form-label"
+							th:text="'Cliente'"></label>
+						<div class="col-sm-6">
+							<input name="customer"
+								th:value="${order.customer.firstName} + ' ' + ${order.customer.lastName}"
+								class="form-control" disabled='disabled' />
+						</div>
+					</div>
+
+					
+
+					<div class="form-group row">
+						<label for="productname" class="col-sm-2 col-form-label"
+							th:text="'Producto'"></label>
+						<div class="col-sm-6">
+							<input type="text" name="searchproduct" id="searchproduct"
+								class="form-control" />
+						</div>
+					</div>
+
+
+
+
+
+				</div>
+			</div>
+
+			<div class="card bg-light">
+				<div class="card-header text-white bg-dark">Detalle</div>
+				<div class="card-body">
+					<table th:replace="order/template-items :: itemsOrder"></table>
+
+					<table id="loadItemProducts"
+						class="table table-sm table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Producto</th>
+								<th>Precio</th>
+								<th>Cantidad</th>
+								<th>Total</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<h5>
+						Total <span class="badge badge-primary" id="gran_total">0</span>
+					</h5>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Registrar" class="btn btn-primary" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:insert="navbar::footer"></div>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery-ui.min.js}"></script>
+	<script th:replace="order/js/autocomplete-products :: javascript"></script>
+
+</body>
+</html>

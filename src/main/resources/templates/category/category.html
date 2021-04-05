@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Category</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+</head>
+<body>
+	<div th:insert="navbar::navbar"></div>
+	<div class="container text-center">
+		<div class="card">
+			<div class="card-header text-white bg-dark">Category</div>
+			
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="bg-dark text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombre</th>
+								<th><a th:href="@{/categories/new}" class="btn btn-primary">Nuevo</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="category:${categories}">
+								<td th:text="${category.id}"></td>
+								<td th:text="${category.name}"></td>
+								<td>
+									<a  th:href="'/categories/edit/'+${category.id}" class="btn btn-primary">Editar</a>
+									<a  th:href="'/categories/delete/'+${category.id}"  class="btn btn-danger">Eliminar</a>
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav th:replace="paginator/paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+	<div th:insert="navbar::footer"></div>
+</body>
+<script type="text/javascript">
+	function clearFilter() {
+		window.location = '/categories/lista'
+	}
+</script>
+</html>

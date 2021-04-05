@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+	<meta charset="utf-8">
+	<title>Inventory App</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+</head>
+<body>
+
+	
+	<div class="container">
+		<div>
+			<h1>Iniciar Sesión</h1>
+			<form th:action="@{/login}" method="post">
+				<div class="form-group">
+				 <input type="text" name="username" class="form-control" placeholder="usuario"
+				    autofocus="autofocus" required="required">
+				</div>
+				
+				<div class="form-group">
+				 <input type="password" name="password" class="form-control" placeholder="contraseña"
+				     required="required">
+				</div>
+				
+				<div class="form-group">
+				 <input type="submit" class="btn btn-primary" value="Ingresar">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="alert alert-danger" th:if="${error!=null}"
+	  th:text="${error}"></div>
+	  
+	 <div class="alert alert-danger" th:if="${success!=null}"
+	  th:text="${success}"></div>
+
+</body>
+</html>

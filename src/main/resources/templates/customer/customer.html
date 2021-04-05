@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Clientes</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+</head>
+<body>
+	<div th:insert="navbar::navbar"></div>
+	<div class="container text-center">
+		<div class="card">
+			<div class="card-header text-white bg-dark">Customer</div>
+			<div class="card-body">
+
+
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="bg-dark text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombre& Apellido</th>
+								<th>DNI</th>
+								<th><a th:href="@{/customers/new}" class="btn btn-primary">Nuevo</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="customer:${customers}">
+								<td th:text="${customer.id}"></td>
+								<td th:text="${customer.firstName}+' '+${customer.lastName}"></td>
+								<td th:text="${customer.dni}"></td>
+								<td>
+									<a  th:href="'/customers/edit/'+${customer.id}" class="btn btn-primary">Editar</a>
+									<a  th:href="'/customers/delete/'+${customer.id}"  class="btn btn-danger">Eliminar</a>
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav th:replace="paginator/paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+	<div th:insert="navbar::footer"></div>
+</body>
+</html>

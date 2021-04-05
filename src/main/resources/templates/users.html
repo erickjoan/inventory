@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Usuarios</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+</head>
+<body>
+	<div th:insert="navbar::navbar"></div>
+	<div class="container text-center">
+		<div>
+			<h1>User List</h1>
+		</div>
+		<div>
+		<div>
+			<table class="table table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Users</th>
+						<th>Roles</th>
+						<th><a th:href="@{/users/new}" class="btn btn-primary">Nuevo</a></th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr th:each="user: ${users}">
+							<td th:text="${user.id}">1</td>
+							<td th:text="${user.userName}">1</td>
+							<td th:text="${user.roles}">1</td>
+							<td>
+								<a th:href="'/users/edit/'+${user.id}" class="btn btn-primary">Editar</a>								
+								<a th:href="'/users/delete/'+${user.id}" class="btn btn-danger">Eliminar</a>
+							</td>
+						</tr>
+				</tbody>
+			</table>
+			
+		</div>
+		<nav th:replace="paginator/paginator-nav :: paginator"></nav>
+       </div>
+
+				
+	</div>
+	<div th:insert="navbar::footer"></div>
+</body>
+<script type="text/javascript">
+	function clearFilter() {
+		window.location = '/users'
+	}
+</script>
+</html>
+
+
+
+
